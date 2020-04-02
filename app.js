@@ -23,11 +23,11 @@ let posts = [
   },
   {
     title: 'Testing',
-    content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Vestibulum lorem sed risus ultricies tristique nulla. Tristique et egestas quis ipsum suspendisse. Nibh praesent tristique magna sit amet purus gravida quis blandit. Blandit massa enim nec dui nunc mattis. Fames ac turpis egestas sed tempus urna et pharetra pharetra. Non consectetur a erat nam at lectus. Dui accumsan sit amet nulla facilisi morbi tempus iaculis urna. Massa sapien faucibus et molestie ac feugiat sed lectus. Duis ut diam quam nulla porttitor massa. Mauris augue neque gravida in.'
+    content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Tempus imperdiet nulla malesuada pellentesque elit eget gravida. Quam pellentesque nec nam aliquam sem et. Adipiscing elit pellentesque habitant morbi tristique senectus et. Lorem sed risus ultricies tristique nulla aliquet. Consequat ac felis donec et odio. Vulputate dignissim suspendisse in est ante. Turpis egestas integer eget aliquet nibh praesent tristique magna. At ultrices mi tempus imperdiet nulla malesuada pellentesque elit eget. Orci nulla pellentesque dignissim enim sit amet venenatis urna cursus. Semper feugiat nibh sed pulvinar proin gravida hendrerit. Urna porttitor rhoncus dolor purus non enim praesent elementum.'
   },
   {
     title: 'Another Post',
-    content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Vestibulum lorem sed risus ultricies tristique nulla. Tristique et egestas quis ipsum suspendisse. Nibh praesent tristique magna sit amet purus gravida quis blandit. Blandit massa enim nec dui nunc mattis. Fames ac turpis egestas sed tempus urna et pharetra pharetra. Non consectetur a erat nam at lectus. Dui accumsan sit amet nulla facilisi morbi tempus iaculis urna. Massa sapien faucibus et molestie ac feugiat sed lectus. Duis ut diam quam nulla porttitor massa. Mauris augue neque gravida in.'
+    content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Fermentum odio eu feugiat pretium nibh ipsum consequat nisl. Faucibus a pellentesque sit amet porttitor eget dolor morbi. Amet nisl suscipit adipiscing bibendum est ultricies integer quis auctor. Euismod elementum nisi quis eleifend quam adipiscing vitae proin. Semper risus in hendrerit gravida rutrum quisque non. Amet cursus sit amet dictum sit amet. Id porta nibh venenatis cras sed felis eget. Cras tincidunt lobortis feugiat vivamus at augue eget. Risus nullam eget felis eget nunc lobortis mattis. Enim ut sem viverra aliquet eget sit amet. Aenean vel elit scelerisque mauris pellentesque pulvinar. Ut etiam sit amet nisl purus in. Massa sed elementum tempus egestas sed sed. Nulla malesuada pellentesque elit eget gravida cum sociis natoque penatibus. Venenatis lectus magna fringilla urna porttitor. Vulputate ut pharetra sit amet aliquam id diam maecenas ultricies. Ut faucibus pulvinar elementum integer.'
   }
 ];
 
@@ -63,11 +63,10 @@ app.get('/posts/:postTitle', function(req, res) {
   for (var i=0; i<posts.length; i++) {
     const storedTitle = _.lowerCase(posts[i].title);
       if (requestedTitle == storedTitle) {
-        console.log("It's a Match!");
+        res.render("post", {currentPost: posts[i]});
         return;
       }
   }
-  console.log("Not a Match");
 });
 
 
