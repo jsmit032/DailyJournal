@@ -32,7 +32,10 @@ let posts = [
 ];
 
 app.get('/', function(req, res){
-  res.render("home", {homeConent: homeStartingContent, posts: posts});
+  res.render("home", {
+    homeConent: homeStartingContent,
+    posts: posts
+  });
 });
 
 app.get('/about', function(req, res){
