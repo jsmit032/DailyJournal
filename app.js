@@ -57,10 +57,7 @@ app.get('/', function(req, res){
       res.redirect('/');
     } else {
       Post.findOne({ title: "home" }, function(err , foundPost){
-        if (err) {
-          console.log(err);
-        } else {
-          console.log(foundPost);
+        if (!err) {
           res.render('home', { homeConent: foundPost });
         }
       });
@@ -74,11 +71,21 @@ app.get('/', function(req, res){
 });
 
 app.get('/about', function(req, res){
-  res.render("about", {aboutContent: aboutContent});
+  Post.findOne({ title: "about" }, function(err , foundPost){
+    if (!err) {
+      console.log()
+      res.render('about', { aboutContent: foundPost });
+    }
+  });
 });
 
 app.get('/contact', function(req, res){
-  res.render("contact", {contactContent: contactContent});
+  Post.findOne({ title: "contact" }, function(err , foundPost){
+    if (!err) {
+      console.log()
+      res.render('contact', { contactContent: foundPost });
+    }
+  });
 });
 
 app.get('/compose', function(req, res){
