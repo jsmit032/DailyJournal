@@ -56,8 +56,14 @@ app.get('/', function(req, res){
       });
       res.redirect('/');
     } else {
-      console.log(foundPosts);
-      res.render('home', { currentPost: foundPosts });
+      Post.findOne({ title: "home" }, function(err , foundPost){
+        if (err) {
+          console.log(err);
+        } else {
+          console.log(foundPost);
+          res.render('home', { homeConent: foundPost });
+        }
+      });
     }
   });
 
