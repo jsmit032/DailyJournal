@@ -63,11 +63,6 @@ app.get('/', function(req, res){
       });
     }
   });
-
-// else statement
-  // res.render("home", {
-  //   homeConent: homeStartingContent
-  // });
 });
 
 app.get('/about', function(req, res){
@@ -93,13 +88,32 @@ app.get('/compose', function(req, res){
 });
 
 app.post('/compose', function(req, res){
-  const post = {
-    title: req.body.postTitle,
-    content: req.body.postBody
-  };
+  const postTitle = _.lowerCase(req.body.postTitle);
+  const postContent = req.body.postBody;
 
-  posts.push(post);
-  res.redirect('/');
+  var newPost = new Post({
+    title: postTitle,
+    content: postContent
+  });
+
+  Post.findOne( {title: postTitle}, function(err, foundPost){
+    if (!err) {
+      if (!foundPost) {
+        // create, push, save, and redirect to homepage
+        newPost.save(function (err) {
+          if (!err) {
+            res.redirect('/');
+          } else {
+            res.redirect('/compose');
+          }
+        });
+      } else {
+        console.log(foundPost);
+        res.redirect('/compose');
+        console.log("I'm sorry, this title matches a current post, please pick a new one!");
+        }
+      }
+    });
 });
 
 app.get('/posts/:postTitle', function(req, res) {
