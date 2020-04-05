@@ -56,9 +56,11 @@ app.get('/', function(req, res){
       });
       res.redirect('/');
     } else {
+      const newPosts = foundPosts.slice(3);
+      console.log(newPosts);
       Post.findOne({ title: "home" }, function(err , foundPost){
         if (!err) {
-          res.render('home', { homeConent: foundPost });
+          res.render('home', { homeContent: foundPost, posts: newPosts});
         }
       });
     }
@@ -108,7 +110,6 @@ app.post('/compose', function(req, res){
           }
         });
       } else {
-        console.log(foundPost);
         res.redirect('/compose');
         console.log("I'm sorry, this title matches a current post, please pick a new one!");
         }
