@@ -117,18 +117,19 @@ app.post('/compose', function(req, res){
 });
 
 app.get('/posts/:postTitle', function(req, res) {
-  const requestedTitle = _.lowerCase(req.params.postTitle);
+  const requestedTitle = req.params.postTitle;
 
-  for (var i=0; i<posts.length; i++) {
-    const storedTitle = _.lowerCase(posts[i].title);
-      if (requestedTitle == storedTitle) {
-        console.log(storedTitle);
-        res.render("post", {
-          currentPost: posts[i]
-        });
-        return;
-      }
-  }
+  Post.findOne( {title: requestedTitle}, function(err, foundPost){
+      const storedTitle = foundPost.title;
+      console.log(storedTitle);
+        if (requestedTitle == storedTitle) {
+          console.log(storedTitle);
+          res.render("post", {
+            currentPost: foundPost
+          });
+          return;
+        }
+  }); // end of findOne
 });
 
 
